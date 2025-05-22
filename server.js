@@ -47,14 +47,13 @@ const fetchData = async () => {
   }
 };
 
-fetchData();
-setInterval(fetchData, 60 * 60 * 1000);
-
 const conversationHistories = {};
 
 io.on('connection', (socket) => {
   console.log('New client connected:', socket.id);
   conversationHistories[socket.id] = [];
+
+  fetchData();
 
   const initialBotMessage =
     'Hello! I am your sales assistant. How can I help you find the perfect coffee or merch today?';
